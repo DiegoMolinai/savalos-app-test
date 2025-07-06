@@ -51,6 +51,7 @@ export default function LoginPage() {
       login(data.token, data.user)
       router.push('/visitas')
     } catch (err) {
+      console.log(err)
       setError('Error inesperado al iniciar sesión')
     } finally {
       setSubmitting(false)
