@@ -27,23 +27,15 @@ export async function POST(req) {
       { expiresIn: '1d' }
     );
 
-    const response = NextResponse.json({
+    return NextResponse.json({
       success: true,
+      token, // 👈 importante para el frontend
       user: {
         name: user.fullName,
-        role: user.role
+        role: user.role,
+        email: user.email
       }
     });
-
-    response.cookies.set({
-      name: 'token',
-      value: token,
-    //   httpOnly: true,
-      maxAge: 60 * 60 * 24, // 1 día
-      path: '/'
-    });
-
-    return response;
   } catch (err) {
     console.error('Error en login:', err);
     return NextResponse.json({ error: 'Error en el servidor' }, { status: 500 });
