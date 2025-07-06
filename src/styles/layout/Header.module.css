@@ -1,0 +1,74 @@
+.header {
+  background-color: #A7D3F3;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #073B4C;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.logoIcon {
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  color: #073B4C;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+.link {
+  position: relative;
+  color: #073B4C;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.5s ease;
+  padding-bottom: 2px; /* espacio para el borde */
+  border-bottom: 2px solid transparent; /* ocupa espacio, pero invisible */
+}
+
+.link:hover {
+  color: #045B76;
+  border-bottom: 2px solid #045B76; /* visible solo en hover */
+}
+
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.userButton {
+  background-color: #87C5FF;
+  color: #073B4C;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.userButton:hover {
+  background-color: #57A0D3;
+}
