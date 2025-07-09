@@ -5,41 +5,41 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [authVersion, setAuthVersion] = useState(0) // 🆕
+  const [authVersion, setAuthVersion] = useState(0)
 
+  // Obtener usuario desde API segura (cookie-based)
   useEffect(() => {
-    const storedToken = localStorage.getItem('token')
-    const storedUser = localStorage.getItem('user')
-
-    if (storedToken && storedUser) {
-      setToken(storedToken)
-      setUser(JSON.parse(storedUser))
+    const fetchUser = async () => {
+      try {
+        const res = await fetch('/api/auth/me')
+        if (!res.ok) throw new Error('No autenticado')
+        const data = await res.json()
+        setUser(data.user)
+      } catch (err) {
+        setUser(null)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    setLoading(false)
-  }, [])
+    fetchUser()
+  }, [authVersion])
 
-  const login = (newToken, newUser) => {
-    localStorage.setItem('token', newToken)
-    localStorage.setItem('user', JSON.stringify(newUser))
-    setToken(newToken)
-    setUser(newUser)
-    setAuthVersion((v) => v + 1) // 🆕
+  const login = (user) => {
+    setUser(user)
+    setAuthVersion((v) => v + 1)
   }
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    setToken(null)
+  const logout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' })
     setUser(null)
-    setAuthVersion((v) => v + 1) // 🆕
+    setAuthVersion((v) => v + 1)
   }
 
   return (
-    <AuthContext.Provider value={{ token, user, loading, login, logout, authVersion }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, authVersion }}>
       {children}
     </AuthContext.Provider>
   )
