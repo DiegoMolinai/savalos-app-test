@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGO_URI = process.env.MONGO_URI;
-
-console.log(MONGO_URI)
+const MONGO_URI = "mongodb+srv://savalosAdmin:123123123@cluster0.3b6qnpt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 if (!MONGO_URI) {
   throw new Error("⚠️ MONGO_URI no está definida en .env.local");
