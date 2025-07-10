@@ -1,18 +1,20 @@
-// src/layout/Header.jsx
-'use client'
+"use client";
 
-import Link from "next/link"
-import { FaRegListAlt } from "react-icons/fa"
-import { useAuth } from "@/context/AuthContext"
-import styles from "@/styles/layout/Header.module.css"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { FaRegListAlt } from "react-icons/fa";
+import { useAuth } from "@/context/AuthContext";
+import styles from "@/styles/layout/Header.module.css";
 
 export default function Header() {
-  const { token, loading, logout } = useAuth()
+  const { user, loading, logout } = useAuth();
+  const router = useRouter();
 
-  const handleLogout = () => {
-    logout()
-    window.location.href = '/login'
-  }
+  const handleLogout = async () => {
+    await logout();
+    localStorage.clear(); // solo si guardas algo allí
+    router.push("/login");
+  };
 
   return (
     <header className={styles.header}>
@@ -23,13 +25,16 @@ export default function Header() {
         </Link>
 
         <nav className={styles.nav}>
-          <Link href="/" className={styles.link}>Inicio</Link>
-          <Link href="/items" className={styles.link}>Items</Link>
-          <Link href="/visitas" className={styles.link}>Visitas</Link>
+          <Link href="/" className={styles.link}>
+            Inicio
+          </Link>
+          <Link href="/visitas" className={styles.link}>
+            Visitas
+          </Link>
         </nav>
 
         <div className={styles.actions}>
-          {!loading && token && (
+          {!loading && user && (
             <button onClick={handleLogout} className={styles.userButton}>
               Cerrar sesión
             </button>
@@ -37,5 +42,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

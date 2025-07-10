@@ -11,10 +11,6 @@ export default function Footer() {
           <p><FaMapMarkerAlt className={styles.icon} /> Santiago, Chile</p>
         </div>
       </div>
-
-      <div className={styles.bottomBar}>
-        <p>© {new Date().getFullYear()} Savalos SPA. Todos los derechos reservados.</p>
-      </div>
     </footer>
   );
 }

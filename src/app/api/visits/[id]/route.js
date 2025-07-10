@@ -3,8 +3,9 @@ import dbConnect from '@/lib/dbConnect'
 import Visit from '@/models/Visit'
 
 // GET /api/visits/:id
-export async function GET(req, { params }) {
+export async function GET(req, context) {
   await dbConnect()
+  const { params } = context
 
   try {
     const visit = await Visit.findById(params.id)
@@ -18,8 +19,9 @@ export async function GET(req, { params }) {
 }
 
 // PUT /api/visits/:id
-export async function PUT(req, { params }) {
+export async function PUT(req, context) {
   await dbConnect()
+  const { params } = context
 
   try {
     const data = await req.json()
@@ -40,8 +42,9 @@ export async function PUT(req, { params }) {
 }
 
 // DELETE /api/visits/:id
-export async function DELETE(req, { params }) {
+export async function DELETE(req, context) {
   await dbConnect()
+  const { params } = context
 
   try {
     const deletedVisit = await Visit.findByIdAndDelete(params.id)
