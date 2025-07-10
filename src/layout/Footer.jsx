@@ -10,16 +10,6 @@ export default function Footer() {
           <p><FaShieldAlt className={styles.icon} /> Seguridad y tecnología a tu alcance</p>
           <p><FaMapMarkerAlt className={styles.icon} /> Santiago, Chile</p>
         </div>
-
-        <div className={styles.links}>
-          <h4>Enlaces</h4>
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/visitas">Visitas</a></li>
-            <li><a href="/about">Sobre nosotros</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-          </ul>
-        </div>
       </div>
 
       <div className={styles.bottomBar}>
